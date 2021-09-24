@@ -1,4 +1,4 @@
-#kmg_csv2json
+# kmg_csv2json
 
 This is a Python script to ease batch creation of module entries for [kosmodulargrid](https://www.kosmodulargrid.com/), by converting a CSV file and generating the needed UUIDs.
 
