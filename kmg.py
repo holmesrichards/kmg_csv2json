@@ -86,6 +86,12 @@ def main():
             else:
                 data['type'] = []
 
+            # width should be number
+            if '.' in data['width']:
+                data['width'] = float(data['width'])
+            elif data['width'] != "":
+                data['width'] = int(data['width'])
+
             datalist.append(data)
             
         # JSON to stdout
