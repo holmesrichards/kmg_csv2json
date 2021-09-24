@@ -2,6 +2,7 @@
 
 # CSV to JSON for kosmodulargrid, with UUID generation
 # Rich Holmes, September 2021
+# CC0 v1.0
 
 import uuid
 import csv
