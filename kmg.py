@@ -8,6 +8,7 @@ import uuid
 import csv
 import json
 from sys import argv
+import re
 
 # To use: Create a CSV file with these fields:
 # id, makerId, function, name, description, width, type, link, imageLink
@@ -78,11 +79,11 @@ def main():
 
             # split 'function' and 'type' fields
             if data['function'] != '':
-                data['function'] = data['function'].split(',')
+                data['function'] = re.split(',\s*', data['function'])
             else:
                 data['function'] = []
             if data['type'] != '':
-                data['type'] = data['type'].split(',')
+                data['type'] = re.split(',\s*', data['type'])
             else:
                 data['type'] = []
 
