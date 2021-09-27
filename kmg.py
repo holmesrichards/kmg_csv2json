@@ -79,11 +79,11 @@ def main():
 
             # split 'function' and 'type' fields
             if data['function'] != '':
-                data['function'] = re.split(',\s*', data['function'])
+                data['function'] = re.split('\s*,\s*', data['function'])
             else:
                 data['function'] = []
             if data['type'] != '':
-                data['type'] = re.split(',\s*', data['type'])
+                data['type'] = re.split('\s*,\s*', data['type'])
             else:
                 data['type'] = []
 
