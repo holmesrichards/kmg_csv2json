@@ -22,22 +22,22 @@ import re
 # In function and type columns, comma separated values will become
 # list entries.
 #
-# If 'makerId' is empty, a default value is filled in. At startup the
-# default value is the second command line argument, if present. If
-# not, a new UUID will be generated for the default. If 'makerId' is
-# nonempty, that value will be used for that entry and will become the
-# default for subsequent entries. Typically the way to proceed would
-# be: Leave 2nd argument off and 'makerId' column blank the first time
-# you run the script, then put the generated UUID in the 'makerId'
-# field for the first row or 2nd command line argument on subsequent
-# runs.
+# If the 'makerId' field is empty, a default value is filled in. At
+# startup the default value is the second command line argument, if
+# present. If not, a new UUID will be generated for the default. If
+# the 'makerId' field is nonempty (and its value is not 'makerId'),
+# that value will be used for that entry and will become the default
+# for subsequent entries. Typically the way to proceed would be: Leave
+# 2nd argument off and 'makerId' field blank the first time you run
+# the script, then put the generated UUID in the 'makerId' field for
+# the first row or 2nd command line argument on subsequent runs.
 #
-# Lines with nonempty 'id' will generate no output (so you can safely
-# include a header line, or lines that describe modules already listed
-# if they have an id entered).
+# Lines with nonempty 'id' field will generate no output (so you can
+# safely include a header line, or lines that describe modules already
+# listed if they have an id entered).
 #
-# Lines with empty 'id' will generate output, and a new UUID will be
-# generated for the 'id' field.
+# Lines with empty 'id' field will generate output, and a new UUID
+# will be generated for the 'id' field.
 
 def main():
 
@@ -63,11 +63,12 @@ def main():
             data = {key: fi[key] for key in fldn}
 
             # use default makerId if none supplied, otherwise make that
-            # the new default
+            # the new default (unless it's a header line)
             if data['makerId'] == '':
                 data['makerId'] = defmakerId
-            else:
+            elif data['makerId'] != 'makerId':
                 defmakerId = data['makerId']
+                print (">>>", defmakerId)
 
             # ignore header line, and if id is otherwise filled in we assume
             # it's already been listed
