@@ -22,13 +22,6 @@ import re
 # In function and type columns, comma separated values will become
 # list entries.
 #
-# Lines with nonempty 'id' will be ignored (so you can safely include
-# a header line, or lines that describe modules already listed if they
-# have an id entered).
-#
-# Lines with empty 'id' will be included in the output, and a new UUID
-# will be generated for the 'id' field.
-#
 # If 'makerId' is empty, a default value is filled in. At startup the
 # default value is the second command line argument, if present. If
 # not, a new UUID will be generated for the default. If 'makerId' is
@@ -38,6 +31,13 @@ import re
 # you run the script, then put the generated UUID in the 'makerId'
 # field for the first row or 2nd command line argument on subsequent
 # runs.
+#
+# Lines with nonempty 'id' will generate no output (so you can safely
+# include a header line, or lines that describe modules already listed
+# if they have an id entered).
+#
+# Lines with empty 'id' will generate output, and a new UUID will be
+# generated for the 'id' field.
 
 def main():
 
@@ -62,6 +62,13 @@ def main():
         for fi in freader:
             data = {key: fi[key] for key in fldn}
 
+            # use default makerId if none supplied, otherwise make that
+            # the new default
+            if data['makerId'] == '':
+                data['makerId'] = defmakerId
+            else:
+                defmakerId = data['makerId']
+
             # ignore header line, and if id is otherwise filled in we assume
             # it's already been listed
             # Otherwise generate a new UUID
@@ -69,13 +76,6 @@ def main():
                 data['id'] = str(uuid.uuid4())
             else:
                 continue
-
-            # use default makerId if none supplied, otherwise make that
-            # the new default
-            if data['makerId'] == '':
-                data['makerId'] = defmakerId
-            else:
-                defmakerId = data['makerId']
 
             # split 'function' and 'type' fields
             if data['function'] != '':
