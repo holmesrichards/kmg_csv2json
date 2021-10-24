@@ -68,7 +68,6 @@ def main():
                 data['makerId'] = defmakerId
             elif data['makerId'] != 'makerId':
                 defmakerId = data['makerId']
-                print (">>>", defmakerId)
 
             # ignore header line, and if id is otherwise filled in we assume
             # it's already been listed
